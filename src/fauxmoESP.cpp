@@ -312,6 +312,13 @@ bool fauxmoESP::_onTCPData(AsyncClient *client, void *data, size_t len) {
     if (!_enabled) return false;
 
 	char * p = (char *) data;
+	
+	/* Temporary bugfix */
+	char dataArr[len+1];
+	memcpy(dataArr, p, len);
+	p = dataArr;
+	/* End of temporary bugfix */
+	
 	p[len] = 0;
 
 	#if DEBUG_FAUXMO_VERBOSE_TCP
